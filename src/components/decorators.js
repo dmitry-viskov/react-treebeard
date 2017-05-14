@@ -32,7 +32,7 @@ Toggle.propTypes = {
     style: PropTypes.object
 };
 
-const Header = ({node, style}) => {
+const Header = ({node, style, nodesExtendedSettings}) => {
     return (
         <div style={style.base}>
             <div style={style.title}>
@@ -43,13 +43,14 @@ const Header = ({node, style}) => {
 };
 Header.propTypes = {
     style: PropTypes.object,
-    node: PropTypes.object.isRequired
+    node: PropTypes.object.isRequired,
+    nodesExtendedSettings: PropTypes.object
 };
 
 @Radium
 class Container extends React.Component {
     render() {
-        const {style, decorators, terminal, onClick, node} = this.props;
+        const {style, decorators, terminal, onClick, node, nodesExtendedSettings} = this.props;
 
         return (
             <div onClick={onClick}
@@ -58,7 +59,8 @@ class Container extends React.Component {
                 {!terminal ? this.renderToggle() : null}
 
                 <decorators.Header node={node}
-                                   style={style.header}/>
+                                   style={style.header}
+                                   nodesExtendedSettings={nodesExtendedSettings}/>
             </div>
         );
     }
@@ -94,7 +96,8 @@ Container.propTypes = {
         PropTypes.object,
         PropTypes.bool
     ]).isRequired,
-    node: PropTypes.object.isRequired
+    node: PropTypes.object.isRequired,
+    nodesExtendedSettings: PropTypes.object
 };
 
 export default {

@@ -78,19 +78,20 @@ class TreeNode extends React.Component {
     }
 
     renderHeader(decorators, animations) {
-        const {node, style} = this.props;
+        const {node, style, nodesExtendedSettings} = this.props;
 
         return (
             <NodeHeader animations={animations}
                         decorators={decorators}
                         node={Object.assign({}, node)}
                         onClick={this.onClick}
-                        style={style}/>
+                        style={style}
+                        nodesExtendedSettings={nodesExtendedSettings}/>
         );
     }
 
     renderChildren(decorators) {
-        const {animations, decorators: propDecorators, node, style} = this.props;
+        const {animations, decorators: propDecorators, node, style, nodesExtendedSettings} = this.props;
 
         if (node.loading) {
             return this.renderLoading(decorators);
@@ -109,7 +110,8 @@ class TreeNode extends React.Component {
                                                           decorators={propDecorators}
                                                           key={child.id || index}
                                                           node={child}
-                                                          style={style}/>
+                                                          style={style}
+                                                          nodesExtendedSettings={nodesExtendedSettings}/>
                 )}
             </ul>
         );
@@ -144,7 +146,8 @@ TreeNode.propTypes = {
         PropTypes.object,
         PropTypes.bool
     ]).isRequired,
-    onToggle: PropTypes.func
+    onToggle: PropTypes.func,
+    nodesExtendedSettings: PropTypes.object
 };
 
 export default TreeNode;
